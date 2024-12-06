@@ -14,7 +14,7 @@ const NavBar = () => {
         <input></input>
         <span className='p-[10px]'>🔎</span>
       </div>
-      <div className='flex '>
+      <div className='flex'>
         <div className='mr-[20px]'>
           <img src={loginPassword} className='w-[40px] mr-[10px]'></img>
           <p>로그인</p>
