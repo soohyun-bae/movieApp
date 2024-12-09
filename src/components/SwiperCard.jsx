@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import '../SwiperStyle.scss'
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const SwiperCard = ({ movies }) => {
   return (
@@ -14,7 +16,10 @@ const SwiperCard = ({ movies }) => {
             slidesPerView={5}
             spaceBetween={10}
             loop={true}
-            navigation={true}
+            navigation={{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            }}
             pagination={{ clickable: true }}
           >
             {movies.map((movie) => (
@@ -25,6 +30,8 @@ const SwiperCard = ({ movies }) => {
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="swiper-button-next"></div>
+          <div className="swiper-button-prev"></div>
         </div>
       </div>
     </>
