@@ -1,12 +1,14 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import '../SwiperStyle.scss'
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { useSelector } from 'react-redux';
 
-const SwiperCard = ({ movies }) => {
+const SwiperCard = () => {
+  const {data} = useSelector((state) => state.movies)
+
   return (
     <>
       <div className='flex justify-center'>
@@ -22,7 +24,7 @@ const SwiperCard = ({ movies }) => {
             }}
             pagination={{ clickable: true }}
           >
-            {movies.map((movie) => (
+            {data.map((movie) => (
               <SwiperSlide key={movie.id}>
                 <Link to={`/detail/${movie.id}`}>
                   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}></img>

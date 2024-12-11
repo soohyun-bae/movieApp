@@ -29,18 +29,27 @@
     width: 800px;
 
     .movie-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       border: 1px solid gray;
       border-radius: 10px;
       overflow: hidden;
-
+      height: 391px;
+      
       img {
+        margin-top: 10px;
+        border-radius: 10px;
         width: 200px;
         height: 300px;
       }
-
+      
       p {
-        font-size: 18px;
-        font-weight: 700;
+        width: 200px;
+        height: 45px;
+        font-size: 15px;
+        font-weight: 400;
       }
     }
 

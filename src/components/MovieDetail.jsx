@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import movieDetailData from '../movieDetailData.json'
+import { useEffect } from 'react';
+import { fetchDetails } from '../rtk/thunk';
 
 const MovieDetail = () => {
-  // const { id } = useParams()
-  // const movie = movieListData.results.find((movie) => movie.id === Number(id))
+  const { id } = useParams()
+  const dispatch = useDispatch()
+  const {list, loading} = useSelector((state) => state.details)
 
-  const [moveiDetail] = useState(movieDetailData)
-  
-  // const genres = movie.genre_ids.map((genreId) => {
-  //   const genre = movieDetailData.genres.find((genre) => genre.id === genreId)
-  //   return genre ? <div className='genre'>{genre.name}</div> : null
-  // })
-  // console.log(genres)
+  useEffect(() => {
+    if(loading)
+    {dispatch(fetchDetails(id))}
+  }, [dispatch, loading])
+  if(loading) return <div>Loading...</div>
 
-  const posterUrl = `https://image.tmdb.org/t/p/w200${moveiDetail.poster_path}`
-
-  
+  const genres = list.genres?.map(genre => genre.name)
 
   return (
     <div className='movie-detail-card'>
-      <img src={posterUrl} className='w-[350px]'></img>
+      <img src={`https://image.tmdb.org/t/p/w200${list.poster_path}`} alt={list.title} className='w-[350px]'></img>
       <div className='detail-container'>
         <div className='title-vote'>
-          <h1>{moveiDetail.title}</h1>
-          <div>⭐️{moveiDetail.vote_average}</div>
+          <h1>{list.title}</h1>
+          <div>⭐️{list.vote_average}</div>
         </div>
-        <div className='genre-container'>{moveiDetail.genres.map((genre) => genre.name)}</div>
-        <div className='overview'>{moveiDetail.overview}</div>
+        <div className='genre-container'>{genres}</div>
+        <div className='overview'>{list.overview}</div>
       </div>
     </div>
   );
