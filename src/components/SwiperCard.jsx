@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import { useSelector } from 'react-redux';
 
 const SwiperCard = () => {
-  const {data} = useSelector((state) => state.movies)
+  const {mainMovies} = useSelector((state) => state.movies)
 
   return (
     <>
@@ -24,7 +24,7 @@ const SwiperCard = () => {
             }}
             pagination={{ clickable: true }}
           >
-            {data.map((movie) => (
+            {mainMovies.map((movie) => (
               <SwiperSlide key={movie.id}>
                 <Link to={`/detail/${movie.id}`}>
                   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}></img>

@@ -9,9 +9,9 @@ const MovieDetail = () => {
   const {list, loading} = useSelector((state) => state.details)
 
   useEffect(() => {
-    if(loading)
     {dispatch(fetchDetails(id))}
-  }, [dispatch, loading])
+  }, [dispatch, id])
+
   if(loading) return <div>Loading...</div>
 
   const genres = list.genres?.map(genre => genre.name)
