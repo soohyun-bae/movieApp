@@ -16,10 +16,20 @@
   box-sizing: border-box
 }
 
+html,
+body {
+  background-color: #141414;
+  color: white;
+}
+
 .main-card-container {
   @include flex(column, center, center);
   width: 100%;
+  margin: 15px 0;
 
+  .text-movie {
+    font-size: 2.5rem;
+  }
 
   .movie-wrap {
     @include flex(row, center, center);
@@ -37,14 +47,14 @@
       border-radius: 10px;
       overflow: hidden;
       height: 391px;
-      
+
       img {
         margin-top: 10px;
         border-radius: 10px;
         width: 200px;
         height: 300px;
       }
-      
+
       p {
         width: 200px;
         height: 45px;
@@ -52,7 +62,6 @@
         font-weight: 400;
       }
     }
-
   }
 }
 
@@ -104,29 +113,6 @@
   }
 }
 
-.navBar {
-  @include flex(row, center, space-around);
-  border-bottom: 2px solid red;
-  background-color: white;
-  height: 90px;
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 10000;
-
-  input {
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    width: 70%;
-  }
-
-  .search-container {
-    @include flex(row, center, center);
-    width: 40%;
-    height: 30px;
-  }
-}
-
 .swiper-container {
   @include flex(row, center, center);
   height: 450px;
@@ -139,7 +125,7 @@
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 2);
   }
 
-  .swiper-wrapper{
+  .swiper-wrapper {
     height: 400px;
   }
 

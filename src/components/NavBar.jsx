@@ -6,9 +6,12 @@ import { useDebounce } from '../hooks/debounce';
 import { useDispatch } from 'react-redux';
 import { fetchMovie, fetchSearch } from '../rtk/thunk';
 import { resetMovies } from '../rtk/slice';
+import '../navbar.scss'
 
 const NavBar = () => {
   const [inputValue, setInputValue] = useState('')
+  const [menuActive, setMenuActive] = useState(false)
+  const [searchBtnActive, setSearchBtnActive] = useState(false)
   const searchDebounce = useDebounce(inputValue, 1000)
   const dispatch = useDispatch()
 
@@ -16,43 +19,74 @@ const NavBar = () => {
     dispatch(resetMovies())
     dispatch(fetchMovie())
   }
-  
+
   useEffect(() => {
-    if(searchDebounce) {
+    if (searchDebounce) {
       dispatch(fetchSearch(inputValue))
     }
   }, [])
-  // console.log(debounce)
 
-return (
-  <div className='navBar'>
-    <Link to={'/'} onClick={handleLogoClick}>
-      <div className='text-[50px] text-red-400 font-bold'>Logo</div>
-    </Link>
-    <div className='search-container'>
-      <input
-        type='text'
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      ></input>
-      <Link to={`/search?query=${searchDebounce}`}>
-      <span
-        // onClick={handleSearch}
-        className='p-[10px]'>🔎</span>
+  const toggleDropMenu = () => {
+    setMenuActive(true)
+  }
+
+  const toggleFalseMenu = () => {
+    setMenuActive(false)
+  }
+
+  const toggleSearchInput = () => {
+    setSearchBtnActive(!searchBtnActive)
+    console.log(searchBtnActive)
+  }
+
+  return (
+    <div className='navBar'>
+      <div className='logo-and-menu-container'>
+        <Link
+          to={'/'}
+          onClick={handleLogoClick}
+          className='text-[2vw] text-red-600 font-bold w-max'>
+          {/* <div className='text-[3vw] text-red-400 font-bold w-max'> */}
+          Logo
+          {/* </div> */}
         </Link>
-    </div>
-    <div className='flex'>
-      <div className='mr-[20px]'>
-        <img src={loginPassword} className='w-[40px] mr-[10px]'></img>
-        <p>로그인</p>
+        <div className='menu-triger'>
+          <div
+            className='menu-text-and-img'
+            onMouseOver={toggleDropMenu}
+            onMouseLeave={toggleFalseMenu}
+          >
+            메뉴
+          <img src='src/assets/whitedrop.png' className='w-[16px]' />
+          </div>
+          <ul className={`left-side ${menuActive ? 'active' : ''}`}
+            onMouseOver={toggleDropMenu}
+            onMouseLeave={toggleFalseMenu}>
+            <li>홈</li>
+            <li>시리즈</li>
+            <li>영화</li>
+            <li>NEW! 요즘 대세 콘텐츠</li>
+            <li>내가 찜한 리스트</li>
+            <li>언어별로 찾아보기</li>
+          </ul>
+        </div>
       </div>
-      <div className='flex flex-col items-center'>
-        <img src={loginJoin} className='w-[40px] mr-[10px]'></img>
-        <p>회원가입</p>
-      </div>
+      <ul className='right-side'>
+        <li className={`search-btn ${searchBtnActive ? 'search-btn-active' : ''}`} 
+        onClick={toggleSearchInput}
+        >
+          <input />
+          <img src='src/assets/search.png' className='w-[30px]' />
+        </li>
+        <li>
+          <img src='src/assets/noti.png' className='w-[30px]' />
+        </li>
+        <li>
+          <img src='src/assets/woodz.jpeg' className='w-[30px]' />
+        </li>
+      </ul>
     </div>
-  </div>
-);
+  );
 };
 
 export default NavBar;

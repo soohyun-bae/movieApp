@@ -1,0 +1,133 @@
+@mixin flex($direction: row, $align: row, $justify: flex-start) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin linkStyle() {
+  text-decoration: none;
+  color: black;
+}
+
+@mixin navBarMedia() {
+  @media screen and (max-width: 850px) {
+    @content;
+  }
+}
+
+@mixin navBarMediaLarge() {
+  @media screen and (min-width: 851px) {
+    @content;
+  }
+}
+
+
+.navBar {
+  @include flex(row, center, space-between);
+
+  @include navBarMedia() {
+    height: 50px;
+  }
+
+  padding: 0 30px;
+  border-bottom: 2px solid red;
+  background-color: black;
+  height: 70px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 10000;
+
+
+  .logo-and-menu-container {
+    @include flex(row, center, center);
+
+    .menu-triger {
+      display: flex;
+      // flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      height: auto;
+
+      .menu-text-and-img {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+        height: 50px;
+
+        @include navBarMedia() {}
+
+        @include navBarMediaLarge() {
+          display: none;
+        }
+      }
+    }
+
+    ul.left-side {
+      @include flex(row, center, center);
+      width: max-content;
+      height: auto;
+
+      @include navBarMedia() {
+        display: none;
+      }
+
+      &.active {
+        display: flex;
+        position: absolute;
+        top: 50px;
+        flex-direction: column;
+        justify-content: space-between;
+        height: auto;
+        background-color: rgba(255, 255, 255, 0.5);
+
+        li {
+          font-size: 15px;
+          color: black;
+        }
+
+      }
+
+
+      li {
+        padding: 1.5vw;
+        font-size: clamp(10px, 1vw, 16px) // 최소 10px 뷰포트 너비 1%에 따라 조정, 최대 16px
+          // font-size: 1vw;
+      }
+
+    }
+  }
+
+  .right-side {
+    @include flex(row, center, center);
+
+    li {
+      padding: 8px;
+      width: auto;
+    }
+
+    .search-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      input {
+        height: 20px;
+        display: none;
+      }
+
+      &.search-btn-active {
+        input {
+          display: flex;
+
+        }
+      }
+    }
+
+  }
+
+}

@@ -24,7 +24,7 @@ const MovieCard = ({ movie }) => {
   return (
     <>
       <div className='main-card-container'>
-        <div className='text-[50px] mx-[30px]'>Movie</div>
+        <div className='text-movie'>Movie</div>
         <div className='movie-wrap'>
           {
             mainMovies.map((el) => (
