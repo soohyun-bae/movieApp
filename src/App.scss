@@ -16,11 +16,10 @@
   box-sizing: border-box
 }
 
-html,
-body {
-  background-color: #141414;
-  color: white;
-}
+// body {
+//   background-color: #141414;
+//   color: white;
+// }
 
 .main-card-container {
   @include flex(column, center, center);

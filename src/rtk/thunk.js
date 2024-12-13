@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchMovie = createAsyncThunk(
   'movies/fetchMovie',
   async () => {
-    const response = await axios.get("https://api.themoviedb.org/3/movie/popular", {
+    const response = await axios.get("https://api.themoviedb.org/3/discover/movie", {
       params: {
         api_key: import.meta.env.VITE_API_KEY,
         sort_by: "popularity.desc",
@@ -16,7 +16,7 @@ export const fetchMovie = createAsyncThunk(
         certification_country: 'KR',
         certification: '15'
       },
-      headers:{
+      headers: {
         'Authorization': `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
       }
     })
@@ -46,17 +46,16 @@ export const fetchSearch = createAsyncThunk(
         api_key: import.meta.env.VITE_API_KEY,
         query,
         include_adult: false,
-        adult: false,
-        without_genres: "2781",
+        adult:false,
         certification_country: 'KR',
-        certification: '15',
+        certification: '15'
       },
-      headers:{
+      headers: {
         'Authorization': `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
       }
     })
-    const filteredMovies = response.data.results.filter(el => el.popularity >= 300)
-    console.log(response.data.certification)
-    return filteredMovies
+    const filteredMovies = response.data.results.filter(movie => movie.popularity >= 300);
+    console.log(filteredMovies);
+    return filteredMovies;
   }
 )

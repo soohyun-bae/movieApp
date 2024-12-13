@@ -7,7 +7,6 @@ import SwiperCard from './components/SwiperCard'
 import Search from './components/Search'
 
 
-
 function App() {
 
   return (

@@ -11,6 +11,7 @@ import '../navbar.scss'
 const NavBar = () => {
   const [inputValue, setInputValue] = useState('')
   const [menuActive, setMenuActive] = useState(false)
+  const [modeChange, setModeChange] = useState(true)
   const [searchBtnActive, setSearchBtnActive] = useState(false)
   const searchDebounce = useDebounce(inputValue, 1000)
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const NavBar = () => {
   useEffect(() => {
     if (searchDebounce) {
       dispatch(fetchSearch(inputValue))
+      console.log(searchDebounce)
     }
   }, [])
 
@@ -36,7 +38,12 @@ const NavBar = () => {
 
   const toggleSearchInput = () => {
     setSearchBtnActive(!searchBtnActive)
-    console.log(searchBtnActive)
+  }
+
+  const toggleLightMode = () => {
+    setModeChange(!modeChange)
+    document.body.classList.toggle('light-mode', modeChange);
+    console.log(modeChange)
   }
 
   return (
@@ -57,7 +64,7 @@ const NavBar = () => {
             onMouseLeave={toggleFalseMenu}
           >
             메뉴
-          <img src='src/assets/whitedrop.png' className='w-[16px]' />
+            <img src='src/assets/whitedrop.png' className='w-[16px]' />
           </div>
           <ul className={`left-side ${menuActive ? 'active' : ''}`}
             onMouseOver={toggleDropMenu}
@@ -72,17 +79,32 @@ const NavBar = () => {
         </div>
       </div>
       <ul className='right-side'>
-        <li className={`search-btn ${searchBtnActive ? 'search-btn-active' : ''}`} 
-        onClick={toggleSearchInput}
-        >
-          <input />
-          <img src='src/assets/search.png' className='w-[30px]' />
+        <li className={`search-btn ${searchBtnActive ? 'search-btn-active' : ''}`}>
+          <input
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+          />
+          {inputValue ? (
+            <Link to={`/search?query=${searchDebounce}`}>
+              <img src='src/assets/search.png' />
+            </Link>
+          ):(
+            <img 
+            src='src/assets/search.png' 
+            onClick={toggleSearchInput}
+            />
+          )}
         </li>
         <li>
           <img src='src/assets/noti.png' className='w-[30px]' />
         </li>
         <li>
-          <img src='src/assets/woodz.jpeg' className='w-[30px]' />
+          <img src='src/assets/login.png' className='w-[30px]' />
+        </li>
+        <li>
+          <img src='src/assets/lightMode.png' className= {`w-[20px] mode-change-btn ${modeChange ? 'light-mode' : ''}`}
+          onClick={toggleLightMode}
+          />
         </li>
       </ul>
     </div>
