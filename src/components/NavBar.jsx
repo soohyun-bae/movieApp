@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import loginPassword from '../assets/loginPassword.png'
-import loginJoin from '../assets/loginJoin.png'
-import { useDebounce } from '../hooks/debounce';
 import { useDispatch } from 'react-redux';
 import { fetchMovie, fetchSearch } from '../rtk/thunk';
 import { resetMovies } from '../rtk/slice';
-import '../navbar.scss'
+import '../style/navbar.scss'
+import { useDebounce } from '../hooks/useDebounce';
+
 
 const NavBar = () => {
   const [inputValue, setInputValue] = useState('')
@@ -86,12 +85,13 @@ const NavBar = () => {
           />
           {inputValue ? (
             <Link to={`/search?query=${searchDebounce}`}>
-              <img src='src/assets/search.png' />
+              <img className='w-[30px]' src='src/assets/search.png' />
             </Link>
-          ):(
-            <img 
-            src='src/assets/search.png' 
-            onClick={toggleSearchInput}
+          ) : (
+            <img
+              className='w-[30px]'
+              src='src/assets/search.png'
+              onClick={toggleSearchInput}
             />
           )}
         </li>
@@ -99,11 +99,13 @@ const NavBar = () => {
           <img src='src/assets/noti.png' className='w-[30px]' />
         </li>
         <li>
-          <img src='src/assets/login.png' className='w-[30px]' />
+          <Link to={'/login'}>
+            <img src='src/assets/login.png' className='w-[30px] ' />
+          </Link>
         </li>
         <li>
-          <img src='src/assets/lightMode.png' className= {`w-[20px] mode-change-btn ${modeChange ? 'light-mode' : ''}`}
-          onClick={toggleLightMode}
+          <img src='src/assets/lightMode.png' className={`w-[20px] mode-change-btn ${modeChange ? 'light-mode' : ''}`}
+            onClick={toggleLightMode}
           />
         </li>
       </ul>

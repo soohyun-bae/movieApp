@@ -46,15 +46,12 @@ export const fetchSearch = createAsyncThunk(
         api_key: import.meta.env.VITE_API_KEY,
         query,
         include_adult: false,
-        adult:false,
-        certification_country: 'KR',
-        certification: '15'
       },
       headers: {
         'Authorization': `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
       }
     })
-    const filteredMovies = response.data.results.filter(movie => movie.popularity >= 300);
+    const filteredMovies = response.data.results.filter(movie => movie.popularity >= 400);
     console.log(filteredMovies);
     return filteredMovies;
   }

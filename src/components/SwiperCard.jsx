@@ -4,7 +4,7 @@
 // import 'swiper/css/navigation';
 
 import { Link } from 'react-router-dom';
-import '../SwiperStyle.scss'
+import '../style/SwiperStyle.scss'
 import '@splidejs/react-splide/css';
 import { useSelector } from 'react-redux';
 import {Splide, SplideSlide} from '@splidejs/react-splide';

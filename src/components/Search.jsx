@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { fetchMovie, fetchSearch } from '../rtk/thunk';
-import MovieCard from './MovieCard';
+import MovieCard from '../pages/MovieCard';
 
 const Search = () => {
   const [searchParams] = useSearchParams();
