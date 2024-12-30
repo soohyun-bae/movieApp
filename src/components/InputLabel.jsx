@@ -1,27 +1,26 @@
-import React from 'react';
+// import useValidation from '../hooks/useValidation';
 import '../style/login.scss'
-import { useDispatch, useSelector } from 'react-redux';
-import { loginInputSlice } from '../rtk/slice';
 
-const InputLabel = ({ label, fieldType }) => {
-  const dispatch = useDispatch()
-  const error = useSelector((state) => state.loginInput.error)
+const InputLabel = ({ label, fieldType, name, onChange, error }) => {
+  // const {errors, validate} = useValidation()
 
-  const inputChange = (e) => {
-    dispatch(loginInputSlice.actions.setField({ fieldType: fieldType, value: e.target.value }))
-  }
+  // const inputChange = (e) => {
+  //   const value = e.target.value;
+  //   // validate(fieldType, value);
+  // }
 
   return (
     <div className='input-label-container'>
       <label htmlFor='{label}'>{label}</label> {/*htmlFor : 주소 <label>요소와 함께 사용. 입력 필드 또는 특정 요소와 관련된 연결을 설정하는 데 사용*/}
       <input
-        type={fieldType}
         id={label}
-        onChange={inputChange}
+        type={fieldType}
+        name={name}
+        onChange={onChange}
       />
       <div className='h-[25px]'>
-        {error[fieldType] && (
-          <p className='text-red-400'>{error[fieldType]}</p>
+        {error[name] && (
+          <p className='text-red-400'>{error[name]}</p>
         )}
       </div>
     </div>
