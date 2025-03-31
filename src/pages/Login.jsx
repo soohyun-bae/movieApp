@@ -1,40 +1,32 @@
 import { Link } from "react-router-dom";
 import "../style/login.scss";
 import InputLabel from "../components/InputLabel";
-import { useState } from "react";
+import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
+import { useForm } from "react-hook-form";
+import useUser from "../hooks/useUser";
+import SocialLogin from "../components/SocialLogin";
 
 const Login = () => {
-  const [form, setForm] = useState({
-    email:'',
-    password:'',
-  });
-  const [errors, setErrors] = useState({});
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
-  const inputChange = (e) => {
-    const {name, value} = e.target
-    setForm({...form, [name]: value})
+  const { login } = useSupabaseAuth();
+  const { setUser } = useUser();
 
-    setErrors({[name]: ''})
-  }
+  const onSubmit = async (data) => {
+    const { email, password } = data;
 
-  const validate = () => {
-    const newErrors = {};
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)){
-      newErrors.email = '올바른 이메일 주소를 입력해주세요.'
+    try {
+      const loginData = await login({ email, password });
+      sessionStorage.setItem("user", JSON.stringify(loginData.user));
+      setUser(loginData.user);
+    } catch (error) {
+      console.error("login error : ", error);
     }
-    if(form.password.length < 8) {
-      newErrors.password = '비밀번호는 최소 8자 이상이어야 합니다.'
-    }
-    return newErrors;
-  }
-
-  const handleLogin = () => {
-    const validationErrors = validate()
-
-    if(Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    }
-  }
+  };
 
   return (
     <>
@@ -48,24 +40,47 @@ const Login = () => {
         <div className="login-container">
           <div className="login-inner-container">
             <h1 className="w-full text-center">로그인</h1>
-            <div className="input-container">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+              className="input-container"
+            >
               <InputLabel
                 label="이메일"
                 fieldType="email"
-                name="email"
-                onChange={inputChange}
-                error = {errors}
+                error={errors.email?.message}
+                {...register("email", {
+                  required: {
+                    value: true,
+                    message: "이메일 주소를 입력하세요.",
+                  },
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "올바른 이메일 주소를 입력하세요.",
+                  },
+                })}
               />
               <InputLabel
                 label="비밀번호"
                 fieldType="password"
-                name="password"
-                onChange={inputChange}
-                error = {errors}
+                error={errors.password?.message}
+                {...register("password", {
+                  required: { value: true, message: "비밀번호를 입력하세요" },
+                  minLength: {
+                    value: 8,
+                    message: "비밀번호는 최소 8자 이상이어야 합니다.",
+                  },
+                })}
               />
+              <button type="submit" className="login-btn">
+                로그인
+              </button>
+            </form>
+            <Link to={"/signup"}>회원가입</Link>
+            <div className="easy-login-container">
+              <div className="text-white">또는</div>
+              <SocialLogin />
             </div>
-            <button className="login-btn" onClick={handleLogin}>로그인</button>
-            <Link to={"/signup"}>회원가입 하러가기</Link>
           </div>
         </div>
       </div>

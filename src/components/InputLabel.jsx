@@ -1,13 +1,7 @@
-// import useValidation from '../hooks/useValidation';
+import { forwardRef } from 'react';
 import '../style/login.scss'
 
-const InputLabel = ({ label, fieldType, name, onChange, error }) => {
-  // const {errors, validate} = useValidation()
-
-  // const inputChange = (e) => {
-  //   const value = e.target.value;
-  //   // validate(fieldType, value);
-  // }
+const InputLabel = forwardRef(({ label, fieldType, error, ...rest }, ref) => {
 
   return (
     <div className='input-label-container'>
@@ -15,16 +9,16 @@ const InputLabel = ({ label, fieldType, name, onChange, error }) => {
       <input
         id={label}
         type={fieldType}
-        name={name}
-        onChange={onChange}
+        ref={ref}
+        {...rest}
       />
       <div className='h-[25px]'>
-        {error[name] && (
-          <p className='text-red-400'>{error[name]}</p>
+        {error && (
+          <p className='text-red-400'>{error}</p>
         )}
       </div>
     </div>
   );
-};
+});
 
 export default InputLabel;

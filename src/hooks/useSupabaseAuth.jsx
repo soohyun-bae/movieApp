@@ -6,7 +6,6 @@ const supabaseEnv = {
   projectURL: import.meta.env.VITE_SUPABASE_PROJECT_URL,
 };
 
-//클라이언트 초기화
 export const supabaseClient = createClient(
   supabaseEnv.projectURL,
   supabaseEnv.apiKey
@@ -19,12 +18,11 @@ export const SupabaseProvider = ({ children }) => {
   );
 };
 
-//supabase클라이언트 가져오기
 export const useSupabase = () => {
   const supabase = useContext(SUPABASE);
+
   if (!supabase) {
-    new Error("supabase가 초기화 되지 않았습니다.");
-    return;
+    throw new Error("supabase가 초기화 되지 않았습니다.");
   }
   return supabase;
 };
@@ -42,8 +40,8 @@ const dto = ({ type, rawData }) => {
         user: {
           id: userInfo.sub,
           email: userInfo.email,
-          userName: userInfo.userName,
-          profileImageUrl: userInfo.profileImageUrl,
+          userName: userInfo.userName || userInfo.nickname,
+          profileImageUrl: userInfo.profileImageUrl || '../assets/login.png',
         },
       };
     case DTO_TYPE.error:
@@ -64,16 +62,16 @@ const dto = ({ type, rawData }) => {
 
 export const useSupabaseAuth = () => {
   const supabase = useSupabase();
-  const signUp = async ({ email, password, ...userData }) => {
+  const signUp = async ({ email, password, userName }) => {
     try {
       const data = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
+            userName,
             profileImageUrl:
               "https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295396_1280.png",
-            ...userData,
           },
         },
       });
@@ -103,6 +101,7 @@ export const useSupabaseAuth = () => {
   };
 
   return {
+    supabase,
     signUp,
     login,
     logout,

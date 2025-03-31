@@ -1,26 +1,28 @@
+@mixin flex($direction: row, $align: row, $justify: flex-start) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
 
+@mixin size($w: auto, $h: auto) {
+  width: $w;
+  height: $h;
+}
 
 .login-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row, center, center);
   position: relative;
   top: 50px;
   
   .login-container {
+    @include flex(row, center, center);
+    @include size(500px, 600px);
     background-color: rgba(114, 114, 114, 0.8);
-    width: 500px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px;
 
     .login-inner-container{
         width: 400px;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
 
         h1{
           font-size: 40px;
@@ -28,9 +30,8 @@
         }
 
         .login-btn{
-          height: 35px;
-          width: 400px;
-          text-align: center;
+          @include size(400px, 35px);
+          // text-align: center;
           margin-top: 10px;
           background-color: red;
           border-radius: 5px;
@@ -41,11 +42,32 @@
         a{
           margin: 10px 0;
         }
+
+        .easy-login-container{
+          @include flex(column, center, center);
+
+        }
+
+        .kakao-button{
+          @include size(300px, 40px);
+          margin-top: 10px;
+          background-color: #f0d801;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .google-button {
+          @include size(300px, 40px);
+          margin-top: 10px;
+          background-color: white;
+          color: black;
+          border-radius: 5px;
+          cursor: pointer;
+        }
     }
 
     .input-container {
-      display: flex;
-      flex-direction: column;
+      @include flex(column);
       width: 400px;
 
       input{
@@ -59,8 +81,7 @@
 }
 
 .input-label-container{
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
   margin: 5px 0;
   font-size: 16px;
   input{
@@ -69,26 +90,19 @@
 }
 
 .join-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row, center, center);
   position: relative;
   top: 50px;
   
   .join-container {
+    @include flex(row, center, center);
+    @include size(500px, 700px);
     background-color: rgba(114, 114, 114, 0.8);
-    width: 500px;
-    height: 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px;
 
     .join-inner-container{
+      @include flex(column, start);
         width: 400px;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
 
         h1{
           font-size: 40px;
@@ -96,8 +110,7 @@
         }
 
         .login-btn{
-          height: 35px;
-          width: 400px;
+          @include size(400px, 35px);
           text-align: center;
           margin-top: 10px;
           background-color: red;
@@ -111,8 +124,7 @@
     }
 
     .input-container {
-      display: flex;
-      flex-direction: column;
+      @include flex(column);
       width: 400px;
 
       input{

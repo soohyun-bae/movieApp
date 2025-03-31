@@ -110,11 +110,7 @@ body.light-mode {
           color: white;
           font-weight: 500;
         }
-
       }
-
-
-
     }
   }
 
@@ -147,6 +143,17 @@ body.light-mode {
       }
     }
 
+    .after-login{
+      display: none;
+
+      &.login-active{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 60px;
+      background-color: rgba(114, 114, 114, 0.908);
+    }
+    }
   }
 
 }
