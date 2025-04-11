@@ -1,8 +1,50 @@
-# React + Vite
+# Movie App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 영화 정보 탐색 웹 사이트
+---
 
-Currently, two official plugins are available:
+## 📌 프로젝트 개요
+TMDB API를 활용해 인기 영화 목록과 정보를 제공하고, 검색 및 필터링 기능, 테마 전환 등 사용자 친화적인 기능과 반응형 UI를 구현한 프로젝트입니다. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 주요 기능
+| 기능 영역 | 설명 |
+|-----------|------|
+| 영화 검색 | 사용자 입력을 통한 영화 검색 기능 |
+| 인기/최신 영화 | TMDB API를 통해 인기 영화/최신 영화 목록 출력 |
+| 상세 정보 | 영화 클릭 시 상세 정보(줄거리, 평점, 개봉일) 확인 |
+| 필터링/정렬 | 검색 결과를 기준으로 조건 필터링 가능 |
+| 테마 전환 | 사용자 편의성을 위한 다크모드/라이트모드 기능 구현 |
+| 반응형 UI | 화면 크기에 따라 네비게이션 바 형태 자동 변경 |
+
+## 👩‍💻 담당 역할
+- **메인 페이지 및 검색 결과 페이지 개발**
+    - 사용자 입력을 처리하고 TMDB API에 요청하여 결과 렌더링
+- **영화 상세 정보 컴포넌트 구현**
+    - 클릭 시 줄거리, 평점, 개봉일 등 표시되도록 조건부 렌더링 적용
+- **반응형 네비게이션 바 구현**
+    - 해상도에 따라 메뉴 구조 자동 변경 및 토글 처리
+- **테마 전환 기능 개발**
+    - 상태관리 기반으로 다크모드/라이트모드 전환 가능하도록 구현
+- **팀장 역할**
+    - 일정 조율 및 팀원 간 소통 이슈 해결 지원
+
+## 🛠️ 기술 스택
+- **언어/프레임워크** : JavaScript, React
+- **상태관리** : Redux Toolkit (RTK)
+- **비동기 통신** : Axios
+- **백엔드 환경** : Node.js (패키지 관리 목적)
+- **배포** : Netlify
+- **버전 관리** : Git&GitHub
+
+## 💬 커밋 메세지 컨벤션
+| Type | 설명 |
+|-------|------|
+| feat | 새로운 기능 추가, 중요한 변경사항 |
+| fix | 버그 수정, 오류 수정 |
+| chore | 중요하지 않은 변경사항 (코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우 등) |
+| style | css 수정 |
+| refactor | 코드 리팩토링 |
+
+## 🚀 실행 방법
+npm install
+npm run dev

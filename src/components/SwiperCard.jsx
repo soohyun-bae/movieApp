@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
-import '../SwiperStyle.scss'
+import '../style/SwiperStyle.scss'
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useSelector } from 'react-redux';

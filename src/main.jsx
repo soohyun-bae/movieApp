@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import './index.scss'
+import './style/index.scss'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
