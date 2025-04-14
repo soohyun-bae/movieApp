@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import MovieDetail from './components/MovieDetail'
 import Layout from './components/Layout'
 import SwiperCard from './components/SwiperCard'
+import Login from './pages/Login'
 
 
 
@@ -19,6 +20,7 @@ function App() {
               </div>
             }></Route>
             <Route path='/detail/:id' element={<MovieDetail />}></Route>
+            <Route path='/login' element={<Login />}/>
           </Route>
         </Routes>
   )
