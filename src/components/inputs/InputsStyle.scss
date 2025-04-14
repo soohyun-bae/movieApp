@@ -1,0 +1,14 @@
+@use "../../style/mixins";
+
+.validaton-input-container {
+  @include mixins.flex(column);
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 60%;
+}
+
+.validation-input {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 30px;
+}

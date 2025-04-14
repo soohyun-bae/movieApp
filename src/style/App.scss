@@ -1,14 +1,4 @@
-@mixin flex($direction: row, $align: row, $justify: flex-start) {
-  display: flex;
-  flex-direction: $direction;
-  align-items: $align;
-  justify-content: $justify;
-}
-
-@mixin linkStyle() {
-  text-decoration: none;
-  color: black;
-}
+@use "./mixins.scss";
 
 * {
   margin: 0;
@@ -17,12 +7,12 @@
 }
 
 .main-card-container {
-  @include flex(column, center, center);
+  @include mixins.flex(column, center, center);
   width: 100%;
 
 
   .movie-wrap {
-    @include flex(row, center, center);
+    @include mixins.flex(row, center, center);
     flex-wrap: wrap;
     gap: 40px;
     margin-top: 30px;
@@ -70,12 +60,12 @@
   }
 
   .detail-container {
-    @include flex(column);
+    @include mixins.flex(column);
     width: 90%;
   }
 
   .title-vote {
-    @include flex(row, center);
+    @include mixins.flex(row, center);
     gap: 10px;
     margin-bottom: 20px;
   }
@@ -105,7 +95,7 @@
 }
 
 .navBar {
-  @include flex(row, center, space-around);
+  @include mixins.flex(row, center, space-around);
   border-bottom: 2px solid red;
   background-color: white;
   height: 90px;
@@ -121,14 +111,14 @@
   }
 
   .search-container {
-    @include flex(row, center, center);
+    @include mixins.flex(row, center, center);
     width: 40%;
     height: 30px;
   }
 }
 
 .swiper-container {
-  @include flex(row, center, center);
+  @include mixins.flex(row, center, center);
   height: 450px;
   border-bottom: 3px solid black;
   width: 90%;

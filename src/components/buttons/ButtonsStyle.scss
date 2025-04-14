@@ -1,0 +1,31 @@
+@use "../../style/mixins.scss";
+@use "../../style/responsive";
+
+.logo-button {
+  font-size: 50px;
+  color: mixins.$pink;
+  font-weight: 700;
+  width:max-content;
+  padding: 10px;
+}
+
+.to-login-button {
+  @include mixins.flex(column, center, center)
+}
+
+.Button {
+  border-radius: 5px;
+
+  &.large {
+    width: 60%;
+    height: 30px;
+  }
+
+  &.pink {
+    @include mixins.button-color(mixins.$pink)
+  }
+
+  &.yellow {
+    @include mixins.button-color(#FEE500)
+  }
+}

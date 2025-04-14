@@ -1,0 +1,24 @@
+@use "../style/mixins.scss";
+@use "../style/responsive";
+
+.login-wrapper {
+  @include mixins.flex(column, center, center);
+  gap: 100px;
+}
+
+.login-container {
+  @include mixins.flex(column, center, center);
+  @include responsive.tablet {
+    width: 600px;
+  };
+  @include responsive.mobile {
+    width: 400px;
+  }
+  width: 800px;
+}
+
+.login-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 8px;
+}

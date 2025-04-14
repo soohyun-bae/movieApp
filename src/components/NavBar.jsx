@@ -1,28 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import loginPassword from '../assets/loginPassword.png'
-import loginJoin from '../assets/loginJoin.png'
+import React from "react";
+import LinkButton from "./buttons/LinkButton";
+import { Lock } from "phosphor-react";
 
 const NavBar = () => {
-
   return (
-    <div className='navBar'>
-      <Link to={'/'}>
-        <div className='text-[50px] text-red-400 font-bold'>Logo</div>
-      </Link>
-      <div className='search-container'>
-        <input></input>
-        <span className='p-[10px]'>🔎</span>
+    <div className="navBar">
+      <LinkButton to="/" className="logo-button" children="Logo" />
+      <div className="search-container">
+        <input />
+        <span className="p-[10px]">🔎</span>
       </div>
-      <div className='flex'>
-        <div className='mr-[20px]'>
-          <img src={loginPassword} className='w-[40px] mr-[10px]'></img>
-          <p>로그인</p>
-        </div>
-        <div className='flex flex-col items-center'>
-          <img src={loginJoin} className='w-[40px] mr-[10px]'></img>
-          <p>회원가입</p>
-        </div>
+      <div className="flex">
+        <LinkButton
+          to="/login"
+          className="to-login-button"
+          children={
+            <>
+              <Lock size={32} />
+              <p>로그인</p>
+            </>
+          }
+        />
       </div>
     </div>
   );
