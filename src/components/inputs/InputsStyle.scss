@@ -1,10 +1,12 @@
+@use "../../style/Mixins.scss" as mixins;
+
 .validaton-input-container {
-  display: flex;
-  flex-direction: column;
+  @include mixins.flex(column);
   gap: 10px;
   margin-bottom: 15px;
   width: 60%;
 }
+
 .validation-input {
   border: 1px solid black;
   border-radius: 5px;
