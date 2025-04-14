@@ -13,7 +13,7 @@ const NavBar = () => {
       <div className="flex">
         <LinkButton
           to="/login"
-          className="login-button"
+          className="to-login-button"
           children={
             <>
               <Lock size={32} />
