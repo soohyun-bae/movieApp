@@ -1,4 +1,5 @@
 @use "../style/mixins.scss";
+@use "../style/responsive";
 
 .login-wrapper {
   @include mixins.flex(column, center, center);
@@ -7,7 +8,13 @@
 
 .login-container {
   @include mixins.flex(column, center, center);
-  width: 35vw; 
+  @include responsive.tablet {
+    width: 600px;
+  };
+  @include responsive.mobile {
+    width: 400px;
+  }
+  width: 800px;
 }
 
 .login-text {

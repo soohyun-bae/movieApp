@@ -1,8 +1,9 @@
 @use "../../style/mixins.scss";
+@use "../../style/responsive";
 
 .logo-button {
-  font-size: 5vw;
-  color: #da5f5f;
+  font-size: 50px;
+  color: mixins.$pink;
   font-weight: 700;
   width:max-content;
   padding: 10px;
@@ -12,16 +13,19 @@
   @include mixins.flex(column, center, center)
 }
 
-.login-button {
-  background-color: lightgray;
-  width: 60%;
-  height: 30px;
+.Button {
   border-radius: 5px;
-}
 
-.kakao-login-button {
-  background-color: yellow;
-  width: 60%;
-  height: 30px;
-  border-radius: 5px;
+  &.large {
+    width: 60%;
+    height: 30px;
+  }
+
+  &.pink {
+    @include mixins.button-color(mixins.$pink)
+  }
+
+  &.yellow {
+    @include mixins.button-color(#FEE500)
+  }
 }
