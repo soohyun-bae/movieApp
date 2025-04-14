@@ -1,4 +1,4 @@
-@use "../../style/Mixins.scss" as mixins;
+@use "../../style/mixins";
 
 .validaton-input-container {
   @include mixins.flex(column);
