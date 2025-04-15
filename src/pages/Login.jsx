@@ -4,10 +4,12 @@ import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
 import Button from "../components/buttons/Button";
 import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const {login} = useSupabaseAuth();
 
   const handleLogin = async () => {
@@ -19,6 +21,7 @@ const Login = () => {
     }
 
     console.log("success login", user);
+    navigate("/");
   };
 
   return (
@@ -29,6 +32,7 @@ const Login = () => {
         <ValidationInput type="email" label="이메일" onChange={(e) => setEmail(e.target.value)} />
         <ValidationInput type="password" label="비밀번호" onChange={(e) => setPassword(e.target.value)} />
         <Button onClick={handleLogin} size="large" color="pink">로그인</Button>
+        <LinkButton to="/signUp" children="회원가입 하러가기" />
         <p>-- 또는 --</p>
         <Button size="large" color="yellow">카카오로 로그인하기</Button>
       </div>
