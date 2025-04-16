@@ -1,9 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
-import Button from "../components/buttons/Button";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -16,12 +16,12 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSendCode = async () => {
-    await axios.post("http://localhost:5000/api/request-code", { email });
+    await axios.post("http://localhost:5000/movie/code/request-code", { email });
     setSendCode(true);
   };
 
   const handleVerifyCode = async () => {
-    const res = await axios.post("http://localhost:5000/api/verify-code", {
+    const res = await axios.post("http://localhost:5000/movie/code/verify-code", {
       email,
       code,
     });
@@ -43,14 +43,14 @@ const SignUp = () => {
       return;
     }
 
-    await axios.post("http://localhost:5000/api/register", {
+    await axios.post("http://localhost:5000/movie/auth/register", {
       email,
       password,
       name: userName,
     });
 
     alert("회원가입 완료");
-    navigate('/');
+    navigate("/");
   };
 
   return (
