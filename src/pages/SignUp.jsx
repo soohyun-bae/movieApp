@@ -4,6 +4,7 @@ import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
 import backendAPI from "../utils/backendAPI";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [sendCode, setSendCode] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSendCode = async () => {
@@ -45,12 +47,16 @@ const SignUp = () => {
       return;
     }
 
-    await backendAPI.post("auth/register", {
+    const res = await backendAPI.post("auth/register", {
       email,
       password,
       name: userName,
     });
 
+    const {token, user} = res.data;
+    localStorage.setItem("token", token);
+    dispatch(setUser(user));
+    
     alert("회원가입 완료");
     navigate("/");
   };
