@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
+import backendAPI from "../utils/backendAPI";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -16,12 +16,14 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSendCode = async () => {
-    await axios.post("http://localhost:5000/movie/code/request-code", { email });
+    await backendAPI.post("code/request-code", {
+      email,
+    });
     setSendCode(true);
   };
 
   const handleVerifyCode = async () => {
-    const res = await axios.post("http://localhost:5000/movie/code/verify-code", {
+    const res = await backendAPI.post("code/verify-code", {
       email,
       code,
     });
@@ -43,7 +45,7 @@ const SignUp = () => {
       return;
     }
 
-    await axios.post("http://localhost:5000/movie/auth/register", {
+    await backendAPI.post("auth/register", {
       email,
       password,
       name: userName,
