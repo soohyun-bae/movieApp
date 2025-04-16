@@ -21,11 +21,20 @@
     height: 30px;
   }
 
+  &.middle {
+    width: 160px;
+    height: 30px;
+  }
+
   &.pink {
     @include mixins.button-color(mixins.$pink)
   }
 
   &.yellow {
     @include mixins.button-color(#FEE500)
+  }
+
+  &.gray {
+    @include mixins.button-color(#a1a1a1)
   }
 }
