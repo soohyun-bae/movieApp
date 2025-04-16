@@ -1,9 +1,9 @@
 import express from 'express';
-import sql from '../db.js';
+import sql from '../../db.js';
 
 const router = express.Router();
 
-router.post('/verify-code', async (req, res) => {
+router.post('/', async (req, res) => {
   const { email, code } = req.body;
 
   const rows = await sql`

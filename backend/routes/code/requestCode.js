@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import express from 'express';
 import nodemailer from 'nodemailer';
-import sql from '../db.js';
+import sql from '../../db.js';
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.post('/request-code', async (req, res) => {
+router.post('/', async (req, res) => {
   const { email } = req.body;
 
   const code = crypto.randomBytes(3).toString('hex');

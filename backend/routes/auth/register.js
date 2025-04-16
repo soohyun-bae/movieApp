@@ -1,9 +1,9 @@
 import express from 'express';
-import sql from '../db.js';
+import sql from '../../db.js';
 
 const router = express.Router();
 
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
   const { email, password, name } = req.body;
 
   const rows = await sql`
@@ -21,3 +21,5 @@ router.post('/register', async (req, res) => {
 
   res.json({ message: '회원가입 완료' });
 });
+
+export default router;
