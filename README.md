@@ -47,4 +47,5 @@ TMDB API를 활용해 인기 영화 목록과 정보를 제공하고, 검색 및
 
 ## 🚀 실행 방법
 npm install
+
 npm run dev
