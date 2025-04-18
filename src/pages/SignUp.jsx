@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
-import Button from "../components/buttons/Button";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import backendAPI from "../utils/backendAPI";
+import { useDispatch } from "react-redux";
+import { setUser } from "../rtk/authSlice";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -13,15 +15,18 @@ const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [sendCode, setSendCode] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSendCode = async () => {
-    await axios.post("http://localhost:5000/api/request-code", { email });
+    await backendAPI.post("code/request-code", {
+      email,
+    });
     setSendCode(true);
   };
 
   const handleVerifyCode = async () => {
-    const res = await axios.post("http://localhost:5000/api/verify-code", {
+    const res = await backendAPI.post("code/verify-code", {
       email,
       code,
     });
@@ -43,14 +48,17 @@ const SignUp = () => {
       return;
     }
 
-    await axios.post("http://localhost:5000/api/register", {
+    const res = await backendAPI.post("auth/register", {
       email,
       password,
       name: userName,
     });
 
+    const {user} = res.data;
+    dispatch(setUser(user));
+    
     alert("회원가입 완료");
-    navigate('/');
+    navigate("/");
   };
 
   return (

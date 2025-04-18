@@ -1,10 +1,12 @@
 import { Lock } from "phosphor-react";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import LinkButton from "../buttons/LinkButton";
+import Button from "../buttons/Button";
 
 const NavBar = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const [userMenu, setUserMenu] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="navBar">
@@ -14,10 +16,17 @@ const NavBar = () => {
         <span className="p-[10px]">🔎</span>
       </div>
       <div className="flex">
-        {isAuthenticated ? (
-          <div>
-            <img src={user.profileImage} />
-            <p>{user.userName}</p>
+        {user ? (
+          <div
+            onMouseEnter={() => setUserMenu(true)}
+            onMouseLeave={() => setUserMenu(false)}
+          >
+            <Button children={user.name} />
+            {userMenu && (
+              <div>
+                <Button children="로그아웃" />
+              </div>
+            )}
           </div>
         ) : (
           <LinkButton

@@ -1,32 +1,43 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
-// import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
-// import { setUser } from "../rtk/authSlice";
+import { setUser } from "../rtk/authSlice";
+import backendAPI from "../utils/backendAPI";
+import handleAxiosError from "../utils/handleAxiosError";
 import "./PagesStyle.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
-  // const { login } = useSupabaseAuth();
-  // const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const handleLogin = async () => {
-  //   const { user, error } = await login({ email, password });
+  const handleLogin = async () => {
+    try {
+      const res = await backendAPI.post("auth/login", {
+        email,
+        password,
+      });
 
-  //   if (error) {
-  //     alert(`failed login: ${error.message}`);
-  //     return;
-  //   }
+      if (res.status === 200) {
+        const {token, user} = res.data;
+        localStorage.setItem("token", token);
+        dispatch(setUser(user));
 
-  //   console.log("success login", user);
-  //   dispatch(setUser(user));
-  //   navigate("/");
-  // };
+        alert("로그인이 완료되었습니다.");
+        navigate("/");
+        console.log(res.data);
+      }
+    } catch (error) {
+      const errorRes = handleAxiosError(error);
+      setErrorMessage(errorRes);
+      console.log(errorRes);
+    }
+  };
 
   return (
     <div className="login-wrapper">
@@ -43,7 +54,8 @@ const Login = () => {
           label="비밀번호"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button size="large" color="pink">
+        {errorMessage && <p>{errorMessage}</p>}
+        <Button onClick={handleLogin} size="large" color="pink">
           로그인
         </Button>
         <LinkButton to="/signUp" children="회원가입 하러가기" />

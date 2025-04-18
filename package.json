@@ -7,17 +7,20 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
     "@supabase/supabase-js": "^2.49.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
     "classnames": "^2.5.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.10.1",
     "pg": "^8.14.1",
     "phosphor-react": "^1.4.1",

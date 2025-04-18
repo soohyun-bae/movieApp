@@ -1,15 +1,18 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
-import authRouter from './routes/auth.js';
+import routes from './routes/index.js';
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(express.json());
 
-app.use('/api', authRouter);
+app.use('/movie', routes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
