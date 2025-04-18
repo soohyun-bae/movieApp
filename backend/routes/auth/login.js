@@ -42,7 +42,9 @@ router.post('/', async (req, res) => {
   );
 
   await sql`
-  UPDATE users SET refresh_token = ${refreshToken} WHERE id = ${user.id}
+  INSERT INTO refresh_tokens (user_id, refresh_token)
+  VALUES (${user.id}, ${refreshToken})
+  ON CONFLICT (user_id) DO UPDATE SET refresh_token = EXCLUDED.refresh_token
   `;
 
   res
@@ -51,12 +53,7 @@ router.post('/', async (req, res) => {
       sameSite: 'lax',
       maxAge: 15 * 60 * 1000
     })
-    .cookie('refreshToken', refreshToken), {
-      httpOnly: true,
-      sameSite: 'lax',
-      maxAge: 1 * 60 * 60 * 1000
-    }
-      .json({ message: '로그인 성공', user: { id: user.id, email: user.email, name: user.name } })
+    .json({ message: '로그인 성공', user: { id: user.id, email: user.email, name: user.name } })
 })
 
 export default router;

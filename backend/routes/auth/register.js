@@ -24,12 +24,12 @@ router.post('/', async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await sql`
+  const createdUser = await sql`
   INSERT INTO users (email, password, name)
   VALUES (${email}, ${hashedPassword}, ${name})
   RETURNING id, email, name
   `;
-  const newUser = created[0];
+  const newUser = createdUser[0];
 
   const accessToken = jwt.sign(
     { id: newUser.id, email: newUser.email },
@@ -38,13 +38,13 @@ router.post('/', async (req, res) => {
   );
 
   const refreshToken = jwt.sign(
-    { id: newUser.id, email: user.email },
+    { id: newUser.id, email: newUser.email },
     JWT_REFRESH_SECRET,
     { expiresIn: '1d' }
   );
 
   await sql`
-  INSERT INTO refresh_tokens (user_id, token)
+  INSERT INTO refresh_tokens (user_id, refresh_token)
   VALUES (${newUser.id}, ${refreshToken})
 `;
 
@@ -53,11 +53,6 @@ router.post('/', async (req, res) => {
     httpOnly: true,
     sameSite: 'lax',
     maxAge: 15 * 60 * 1000, // 15분
-  })
-  .cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7일
   })
   .json({ message: '회원가입 완료', user: newUser});
 });
