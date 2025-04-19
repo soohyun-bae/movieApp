@@ -7,9 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/movie': {
-        target: 'http://localhost:5000/movie/',
+        target: 'http://localhost:5000/',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/movie/, ""),
       }
     }
   }

@@ -1,8 +1,8 @@
-import React from 'react';
-import './ButtonsStyle.scss'
-import classNames from 'classnames';
+import classNames from "classnames";
+import React from "react";
+import "./ButtonsStyle.scss";
 
-const Button = ({onClick, size, color, children}) => {
+const Button = ({ onClick, size, color, children }) => {
   return (
     <button onClick={onClick} className={classNames("Button", size, color)}>
       {children}
