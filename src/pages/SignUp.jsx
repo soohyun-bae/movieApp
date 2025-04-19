@@ -5,7 +5,7 @@ import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
 import { setUser } from "../features/auth/authSlice";
-import backendAPI from "../utils/backendAPI";
+import backendAPI from "../utils/api/backendAPI";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
