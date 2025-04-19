@@ -6,7 +6,7 @@ import LinkButton from "../buttons/LinkButton";
 
 const NavBar = () => {
   const [userMenu, setUserMenu] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <div className="navBar">

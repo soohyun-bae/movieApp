@@ -18,19 +18,17 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await backendAPI.post("auth/login", {
+      const res = await backendAPI.post("/auth/login", {
         email,
         password,
       });
 
       if (res.status === 200) {
-        const { token, user } = res.data;
-        localStorage.setItem("token", token);
+        const { user } = res.data;
         dispatch(setUser(user));
 
         alert("로그인이 완료되었습니다.");
         navigate("/");
-        console.log(res.data);
       }
     } catch (error) {
       const errorRes = handleAxiosError(error);

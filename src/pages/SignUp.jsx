@@ -19,14 +19,14 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSendCode = async () => {
-    await backendAPI.post("code/request-code", {
+    await backendAPI.post("/code/request-code", {
       email,
     });
     setSendCode(true);
   };
 
   const handleVerifyCode = async () => {
-    const res = await backendAPI.post("code/verify-code", {
+    const res = await backendAPI.post("/code/verify-code", {
       email,
       code,
     });
@@ -48,7 +48,7 @@ const SignUp = () => {
       return;
     }
 
-    const res = await backendAPI.post("auth/register", {
+    const res = await backendAPI.post("/auth/register", {
       email,
       password,
       name: userName,
