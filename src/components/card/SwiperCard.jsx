@@ -1,10 +1,10 @@
+import { useSelector } from "react-redux";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import "../style/SwiperStyle.scss";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { useSelector } from "react-redux";
-import LinkButton from "./buttons/LinkButton";
+import LinkButton from "../buttons/LinkButton";
+import "../../style/SwiperStyle.scss";
 
 const SwiperCard = () => {
   const { data } = useSelector((state) => state.movies);

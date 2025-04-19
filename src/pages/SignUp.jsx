@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
+import { setUser } from "../features/auth/authSlice";
 import backendAPI from "../utils/backendAPI";
-import { useDispatch } from "react-redux";
-import { setUser } from "../rtk/authSlice";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -54,9 +54,9 @@ const SignUp = () => {
       name: userName,
     });
 
-    const {user} = res.data;
+    const { user } = res.data;
     dispatch(setUser(user));
-    
+
     alert("회원가입 완료");
     navigate("/");
   };

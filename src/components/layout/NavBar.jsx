@@ -1,8 +1,8 @@
 import { Lock } from "phosphor-react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import LinkButton from "../buttons/LinkButton";
 import Button from "../buttons/Button";
+import LinkButton from "../buttons/LinkButton";
 
 const NavBar = () => {
   const [userMenu, setUserMenu] = useState(false);

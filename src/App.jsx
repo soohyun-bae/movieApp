@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
+import MovieCard from "./components/card/MovieCard";
+import SwiperCard from "./components/card/SwiperCard";
 import Layout from "./components/layout/Layout";
-import MovieCard from "./components/MovieCard";
-import MovieDetail from "./components/MovieDetail";
-import SwiperCard from "./components/SwiperCard";
 import Login from "./pages/Login";
+import MovieDetail from "./pages/MovieDetail";
 import SignUp from "./pages/SignUp";
 import "./style/App.scss";
 

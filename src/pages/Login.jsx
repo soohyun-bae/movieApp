@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/buttons/Button";
 import LinkButton from "../components/buttons/LinkButton";
 import ValidationInput from "../components/inputs/ValidationInput";
-import { setUser } from "../rtk/authSlice";
+import { setUser } from "../features/auth/authSlice";
 import backendAPI from "../utils/backendAPI";
 import handleAxiosError from "../utils/handleAxiosError";
 import "./PagesStyle.scss";
@@ -24,7 +24,7 @@ const Login = () => {
       });
 
       if (res.status === 200) {
-        const {token, user} = res.data;
+        const { token, user } = res.data;
         localStorage.setItem("token", token);
         dispatch(setUser(user));
 

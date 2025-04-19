@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovie } from "../rtk/thunk";
-import LinkButton from "./buttons/LinkButton";
+import { fetchMovie } from "../../features/movie/movieThunk";
+import LinkButton from "../buttons/LinkButton";
 
 const MovieCard = () => {
   const dispatch = useDispatch();
