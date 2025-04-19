@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
   const newUser = createdUser[0];
 
   const accessToken = jwt.sign(
-    { id: newUser.id, email: newUser.email },
+    { id: newUser.id, email: newUser.email, name: newUser.name },
     JWT_ACCESS_SECRET,
     { expiresIn: '15m' }
   );
