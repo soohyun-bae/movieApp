@@ -19,21 +19,31 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSendCode = async () => {
-    await backendAPI.post("/code/request-code", {
-      email,
-    });
-    setSendCode(true);
+    try {
+      const res = await backendAPI.post("/code/request-code", {
+        email,
+      });
+      if (res.status === 200) {
+        setSendCode(true);
+      }
+    } catch (error) {
+      alert("인증코드 전송에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   const handleVerifyCode = async () => {
-    const res = await backendAPI.post("/code/verify-code", {
-      email,
-      code,
-    });
+    try {
+      const res = await backendAPI.post("/code/verify-code", {
+        email,
+        code,
+      });
 
-    if (res.status === 200) {
-      setIsVerified(true);
-      alert("인증이 완료되었습니다.");
+      if (res.status === 200) {
+        setIsVerified(true);
+        alert("인증이 완료되었습니다.");
+      }
+    } catch (error) {
+      alert("인증코드 검증에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -48,17 +58,21 @@ const SignUp = () => {
       return;
     }
 
-    const res = await backendAPI.post("/auth/register", {
-      email,
-      password,
-      name: userName,
-    });
+    try {
+      const res = await backendAPI.post("/auth/register", {
+        email,
+        password,
+        name: userName,
+      });
 
-    const { user } = res.data;
-    dispatch(setUser(user));
+      const { user } = res.data;
+      dispatch(setUser(user));
 
-    alert("회원가입 완료");
-    navigate("/");
+      alert("회원가입 완료");
+      navigate("/");
+    } catch (error) {
+      alert("회원가입에 실패했습니다. 다시 시도해주세요");
+    }
   };
 
   return (
