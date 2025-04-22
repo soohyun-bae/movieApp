@@ -21,7 +21,7 @@ app.use(cors({
 app.options("*", cors());
 app.use(cookieParser());
 
-app.use('/movie', routes);
+app.use('/movie/*', routes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
