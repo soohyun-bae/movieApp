@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const app = express();
+app.use(express.json());
 
 const allowedOrigins = [
   'https://frontend-one-pi-24.vercel.app',
@@ -17,7 +18,6 @@ app.use(cors({
   origin: allowedOrigins,
   credentials: true,
 }));
-app.use(express.json());
 app.use(cookieParser());
 
 app.use('/movie', routes);
