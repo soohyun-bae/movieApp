@@ -1,7 +1,7 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import sql from '../../db.js';
-import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -60,3 +60,5 @@ router.post('/', async (req, res) => {
     })
     .json({ message: '토큰 재발급 완료' });
 });
+
+export default router;
