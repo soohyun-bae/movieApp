@@ -8,7 +8,6 @@ import SignUp from "./pages/SignUp";
 import "./style/App.scss";
 
 function App() {
-  console.log('API URL: ', import.meta.env.VITE_BACKEND_API_BASE_URL);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

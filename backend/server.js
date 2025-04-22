@@ -7,8 +7,13 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const app = express();
+
+const allowedOrigins = [
+  'https://frontend-one-pi-24.vercel.app',
+  'https://frontend-8nq4fhebz-soohyuns-projects-994893f7.vercel.app'
+]
 app.use(cors({
-  origin: 'https://frontend-one-pi-24.vercel.app',
+  origin: allowedOrigins,
   credentials: true,
 }));
 app.use(express.json());
