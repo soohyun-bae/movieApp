@@ -4,7 +4,7 @@ import codeRouter from './code/index.js';
 
 const router = express.Router();
 
-router.use('/auth/*', authRouter)
-router.use('/code/*', codeRouter)
+router.use('/auth', authRouter)
+router.use('/code', codeRouter)
 
 export default router;
