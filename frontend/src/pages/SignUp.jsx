@@ -27,6 +27,7 @@ const SignUp = () => {
         setSendCode(true);
       }
     } catch (error) {
+      console.log('sendCode error:', error);
       alert("인증코드 전송에 실패했습니다. 다시 시도해주세요.");
     }
   };
