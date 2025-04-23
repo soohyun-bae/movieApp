@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 import express from 'express';
 import nodemailer from 'nodemailer';
 import sql from '../../db.js';
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   try {
     const { email } = req.body;
 
-    const code = crypto.randomBytes(3).toString('hex');
+    const code = bcrypt.randomBytes(3).toString('hex');
     const expiresAt = new Date(Date.now() + 1000 * 60 * 5);
 
     await sql`
