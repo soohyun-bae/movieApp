@@ -17,8 +17,9 @@ const allowedOrigins = [
 app.use(cors({
   origin: allowedOrigins,
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-type', 'Authorization'],
 }));
-app.options("*", cors());
 app.use(cookieParser());
 
 app.use('/movie', routes);
