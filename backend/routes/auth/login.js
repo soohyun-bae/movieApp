@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
   const accessToken = jwt.sign(
     { id: user.id, email: user.email, name: user.name },
     JWT_ACCESS_SECRET,
-    { expiresIn: '15m' }
+    { expiresIn: '1m' }
   );
 
   const refreshToken = jwt.sign(
