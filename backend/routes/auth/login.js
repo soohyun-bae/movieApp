@@ -50,7 +50,8 @@ router.post('/', async (req, res) => {
   res
     .cookie('accessToken', accessToken, {
       httpOnly: true,
-      sameSite: 'lax',
+      sameSite: 'none',
+      secure: true,
       maxAge: 15 * 60 * 1000
     })
     .json({ message: '로그인 성공', user })

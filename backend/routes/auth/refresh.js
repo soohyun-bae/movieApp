@@ -55,7 +55,8 @@ router.post('/', async (req, res) => {
   res
     .cookie('accessToken', newAccessToken, {
       httpOnly: true,
-      sameSite: 'lax',
+      sameSite: 'none',
+      secure: true,
       maxAge: 15 * 60 * 1000,
     })
     .json({ message: '토큰 재발급 완료' });
