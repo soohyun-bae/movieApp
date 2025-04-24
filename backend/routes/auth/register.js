@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   const accessToken = jwt.sign(
     { id: newUser.id, email: newUser.email, name: newUser.name },
     JWT_ACCESS_SECRET,
-    { expiresIn: '15m' }
+    { expiresIn: '1m' }
   );
 
   const refreshToken = jwt.sign(
@@ -51,8 +51,15 @@ router.post('/', async (req, res) => {
   res
   .cookie('accessToken', accessToken, {
     httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 15 * 60 * 1000, // 15분
+    sameSite: 'none',
+    secure: true,
+    maxAge: 1 * 60 * 1000,
+  })
+  .cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    sameSite: 'none',
+    secure: true,
+    maxAge: 1 * 60 * 60 * 1000,
   })
   .json({ message: '회원가입 완료', user: newUser});
 });
