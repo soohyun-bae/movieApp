@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      maxAge: 15 * 60 * 1000
+      maxAge: 1 * 60 * 1000
     })
     .json({ message: '로그인 성공', user })
 })

@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      maxAge: 15 * 60 * 1000,
+      maxAge: 1 * 60 * 1000,
     })
     .json({ message: '토큰 재발급 완료' });
 });

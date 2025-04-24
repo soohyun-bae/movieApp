@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-    maxAge: 15 * 60 * 1000, // 15분
+    maxAge: 1 * 60 * 1000,
   })
   .json({ message: '회원가입 완료', user: newUser});
 });
