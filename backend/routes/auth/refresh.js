@@ -12,7 +12,7 @@ const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
 router.post('/', async (req, res) => {
   const accessToken = req.cookies.accessToken;
-  const refreshToken = req.header('Authorization');
+  const refreshToken = req.cookies.refreshToken;
 
   if (!refreshToken) {
     return res.status(401).json({ message: '리프레시 토큰 없음' });
@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
   }
 
   const result = await sql`
-  SELECT * FROM refresh_tokens WHERE user_if = ${payload.id}
+  SELECT * FROM refresh_tokens WHERE user_id = ${payload.id}
   `;
   const storedToken = result[0];
 
@@ -58,6 +58,12 @@ router.post('/', async (req, res) => {
       sameSite: 'none',
       secure: true,
       maxAge: 1 * 60 * 1000,
+    })
+    .cookie('refreshToken', newRefreshToken, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 1 * 60 * 60 * 1000,
     })
     .json({ message: '토큰 재발급 완료' });
 });

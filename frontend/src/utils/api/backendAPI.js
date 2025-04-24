@@ -9,4 +9,21 @@ const backendAPI = axios.create({
   withCredentials: true,
 });
 
+backendAPI.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        await backendAPI.post("auth/refresh/")
+        return backendAPI(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default backendAPI;
