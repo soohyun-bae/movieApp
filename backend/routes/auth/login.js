@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
   );
 
   const refreshToken = jwt.sign(
-    { id: user.id, email: user.email },
+    { id: user.id },
     JWT_REFRESH_SECRET,
     { expiresIn: '1d' }
   );
@@ -48,19 +48,17 @@ router.post('/', async (req, res) => {
   `;
 
   res
-    .cookie('accessToken', accessToken, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-      maxAge: 1 * 60 * 1000
-    })
     .cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
       maxAge: 1 * 60 * 60 * 1000,
     })
-    .json({ message: '로그인 성공', user })
+    .json({
+      message: '로그인 성공',
+      user,
+      accessToken: accessToken
+    })
 })
 
 export default router;
