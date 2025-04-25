@@ -16,7 +16,7 @@ backendAPI.interceptors.response.use(
     if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        await backendAPI.post("auth/refresh/")
+        await backendAPI.post("/auth/refresh")
         return backendAPI(originalRequest);
       } catch (refreshError) {
         return Promise.reject(refreshError);

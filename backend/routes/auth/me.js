@@ -9,6 +9,7 @@ const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
 
 router.get('/', (req, res) => {
   console.log('me 라우터 진입')
+  // header에서 꺼내오는 걸로 수정하기기
   const accessToken = req.cookies.accessToken;
 
   if(!accessToken) {
