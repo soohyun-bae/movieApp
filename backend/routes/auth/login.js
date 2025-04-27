@@ -48,6 +48,12 @@ router.post('/', async (req, res) => {
   `;
 
   res
+    .cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 1 * 60 * 1000,
+    })
     .cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
@@ -57,7 +63,6 @@ router.post('/', async (req, res) => {
     .json({
       message: '로그인 성공',
       user,
-      accessToken: accessToken
     })
 })
 
