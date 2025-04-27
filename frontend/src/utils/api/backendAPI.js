@@ -32,10 +32,12 @@ backendAPI.interceptors.response.use(
         const res = await backendAPI.post("/auth/refresh")
 
         if(res.status === 200) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
+          const newAccessToken = res.data.accessToken;
+          Cookies.set('accessToken', newAccessToken);
+          error.config.headers.Authorization = `Bearer ${newAccessToken}`;
         }
 
-        return backendAPI(error);
+        return backendAPI(error.config);
       } catch (refreshError) {
         console.log('refreshToken expired')
         // logout code

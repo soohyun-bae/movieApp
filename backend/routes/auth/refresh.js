@@ -71,6 +71,7 @@ router.post('/', async (req, res) => {
     })
     .json({
       message: '토큰 재발급 완료',
+      accessToken: newAccessToken,
     });
 });
 
