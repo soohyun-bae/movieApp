@@ -25,6 +25,7 @@ const Login = () => {
 
       if (res.status === 200) {
         const { user } = res.data;
+        console.log('login successful', user)
         dispatch(setUser(user));
 
         alert("로그인이 완료되었습니다.");

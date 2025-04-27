@@ -49,6 +49,12 @@ router.post('/', async (req, res) => {
 `;
 
   res
+    .cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 1 * 60 * 1000,
+    })
     .cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
@@ -58,7 +64,6 @@ router.post('/', async (req, res) => {
     .json({
       message: '회원가입 완료',
       user: newUser,
-      accessToken: accessToken
     });
 });
 

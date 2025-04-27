@@ -17,6 +17,7 @@
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "cookie-parser": "^1.4.7",
+    "js-cookie": "^3.0.5",
     "phosphor-react": "^1.4.1",
     "postcss": "^8.4.49",
     "postgres": "^3.4.5",
