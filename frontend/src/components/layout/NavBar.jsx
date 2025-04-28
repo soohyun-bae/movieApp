@@ -7,6 +7,7 @@ import LinkButton from "../buttons/LinkButton";
 const NavBar = () => {
   const [userMenu, setUserMenu] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  console.log('nav user', user);
 
   return (
     <div className="navBar">
@@ -16,7 +17,7 @@ const NavBar = () => {
         <span className="p-[10px]">🔎</span>
       </div>
       <div className="flex">
-        {user ? (
+        {user.id ? (
           <div
             onMouseEnter={() => setUserMenu(true)}
             onMouseLeave={() => setUserMenu(false)}

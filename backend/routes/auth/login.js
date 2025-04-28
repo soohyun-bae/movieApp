@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
   }
 
   const accessToken = jwt.sign(
-    { id: user.id, email: user.email, name: user.name },
+    { id: user.id },
     JWT_ACCESS_SECRET,
     { expiresIn: '1m' }
   );
@@ -62,7 +62,11 @@ router.post('/', async (req, res) => {
     })
     .json({
       message: '로그인 성공',
-      user,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name
+      }
     })
 })
 
