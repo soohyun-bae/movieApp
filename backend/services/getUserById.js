@@ -5,7 +5,7 @@ export const getUserById = async (userId) => {
     const result = await sql`
     SELECT id, email, name
     FROM users
-    WHERE user_id = ${userId}
+    WHERE id = ${userId}
     `;
 
     return result.rows[0];
