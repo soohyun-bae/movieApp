@@ -6,7 +6,8 @@ export const authApi = createApi({
   endpoints: (build) => ({
     getMe: build.query({
       query: () => '/auth/me'
-    })
+    }),
+    
   }),
 });
 
