@@ -11,6 +11,7 @@ const router = express.Router();
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
 router.post('/', async (req, res) => {
+  console.log('refresh api start')
   const refreshToken = req.cookies.refreshToken;
 
   if (!refreshToken) {
