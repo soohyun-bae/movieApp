@@ -8,8 +8,8 @@ export const store = configureStore({
     movies: movieSlice.reducer,
     details: detailSlice.reducer,
     auth: authSlice.reducer,
-    // [authApi.reducerPath]: authApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(authApi.middleware),
 });
