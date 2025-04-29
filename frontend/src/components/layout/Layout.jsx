@@ -10,7 +10,7 @@ const Layout = () => {
   const dispatch = useDispatch();
   const hasAccessToken = document.cookie.includes("accessToken=");
   const { data, isError } = useGetMeQuery(
-    hasAccessToken ? undefined : skipToken
+    hasAccessToken ? skipToken : undefined
   );
 
   useEffect(() => {
