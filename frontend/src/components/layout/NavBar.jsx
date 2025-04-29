@@ -17,7 +17,7 @@ const NavBar = () => {
         <span className="p-[10px]">🔎</span>
       </div>
       <div className="flex">
-        {user.id ? (
+        {user?.id ? (
           <div
             onMouseEnter={() => setUserMenu(true)}
             onMouseLeave={() => setUserMenu(false)}
