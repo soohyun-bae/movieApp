@@ -27,6 +27,8 @@ backendAPI.interceptors.request.use(
 backendAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
+    const originalRequest = error.config;
+
     if (error.response && error.response.status === 401) {
       try {
         const res = await backendAPI.post("/auth/refresh")
@@ -34,10 +36,10 @@ backendAPI.interceptors.response.use(
         if(res.status === 200) {
           const newAccessToken = res.data.accessToken;
           Cookies.set('accessToken', newAccessToken);
-          error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         }
 
-        return backendAPI(error.config);
+        return backendAPI(originalRequest);
       } catch (refreshError) {
         console.log('refreshToken expired')
         // logout code
