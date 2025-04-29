@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     const payload = jwt.verify(accessToken, JWT_ACCESS_SECRET);
     const user = getUserById(payload.id);
 
-    res.json({id: user.id, email: user.email, name: user.name});
+    res.json({user: user});
   } catch (error) {
     return res.status(401).json({message: 'access token이 유효하지 않음'})
   }
