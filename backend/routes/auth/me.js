@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { getUserById } from '../../services/getUserById';
+import { getUserById } from '../../services/getUserById.js';
 
 dotenv.config();
 
