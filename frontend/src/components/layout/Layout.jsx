@@ -4,15 +4,19 @@ import NavBar from "./NavBar";
 import { useDispatch } from "react-redux";
 import { useGetMeQuery } from "../../features/auth/authApi";
 import { clearUser, setUser } from "../../features/auth/authSlice";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 const Layout = () => {
   const dispatch = useDispatch();
-  const { data, isError } = useGetMeQuery();
+  const hasAccessToken = document.cookie.includes("accessToken=");
+  const { data, isError } = useGetMeQuery(
+    hasAccessToken ? undefined : skipToken
+  );
 
   useEffect(() => {
     if (data) {
       dispatch(setUser(data));
-    } 
+    }
     if (isError) {
       dispatch(clearUser());
     }
